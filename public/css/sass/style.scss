@@ -1,0 +1,71 @@
+// $primary: yellow;
+$danger: rgb(192, 50, 50);
+@import "bootstrap/bootstrap.scss";
+@import "carousel.scss";
+// @import "cover.scss";
+.social {
+  a {
+    color: $light;
+    font-size: 1.5rem;
+  }
+}
+.slide-mask {
+    width: 100%;
+    height: 100%;
+    background:linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.9) 100%);
+    position:absolute;bottom:0;z-index:1;
+}
+.jumbotron {
+  background: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.425) 60%, #000),
+    center top / cover url("../images/cover.jpg") fixed;
+}
+.container-top {
+  margin-top: 70px;
+}
+.card {
+  img {
+    width: 100%;
+  }
+}
+.blog-footer {
+  padding: 2.5rem 0;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: 3px solid $danger;
+}
+.blog-footer p:last-child {
+  margin-bottom: 0;
+}
+
+h2.text-danger::after {
+  content: '';
+  display: block;
+  margin-top: 5px;
+  width: 100px;
+  height: 4px;
+  background: $danger;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+.counter ul {
+  counter-reset: counterlist;
+}
+.counter li::before {
+  counter-increment: counterlist;
+  content: counter(counterlist)". "
+}

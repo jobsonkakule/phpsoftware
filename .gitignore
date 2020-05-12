@@ -1,0 +1,9 @@
+public/css/dart-sass
+public/css/fontawesome
+public/css/sass/bootstrap
+public/css/sass/*_
+public/css/*.bat
+public/css/*.map
+public/uploads
+public/adminer.php
+vendor/
