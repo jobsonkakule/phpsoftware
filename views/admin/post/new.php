@@ -8,7 +8,7 @@ use App\Entity\Post;
 use App\Table\PostTable;
 use App\Table\CategoryTable;
 use App\Validators\PostValidator;
-use App\Attachment\PostAttachment;
+use App\Attachment\EntityAttachment;
 
 Auth::check();
 $pdo = Connection::getPDO();
@@ -23,10 +23,10 @@ if(!empty($_POST)) {
     $postTable = new PostTable($pdo);
     $data = array_merge($_POST, $_FILES);
     $v = new PostValidator($data, $postTable, $post->getId(), $categories);
-    Hydrator::hydrate($post, $data, ['name', 'slug', 'content', 'created_at', 'image']);
+    Hydrator::hydrate($post, $data, ['name', 'content', 'created_at', 'image']);
     if ($v->validate()) {
         $pdo->beginTransaction();
-        PostAttachment::upload($post);
+        EntityAttachment::upload($post);
         $postTable->createPost($post);
         $postTable->attachCategories($post->getId(), $_POST['categories_ids']);
         $pdo->commit();

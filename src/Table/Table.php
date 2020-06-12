@@ -98,4 +98,9 @@ abstract class Table {
             throw new Exception("Impossible de modifier l'enregistrement dans la table {$this->table}");
         }
     }
+    
+    public function count (): int
+    {
+       return (int)$this->pdo->query("SELECT COUNT(id) FROM {$this->table}")->fetch()[0];
+    }
 }

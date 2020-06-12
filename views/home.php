@@ -1,14 +1,15 @@
 <?php
 
 use App\Connection;
+use App\Table\DiseaseTable;
 use App\Table\PostTable;
-
-$title = 'Le Blog | Sanitas';
 
 $pdo = Connection::getPDO();
 
-$table = new PostTable($pdo);
-$posts = $table->all(3);
+$postTable = new PostTable($pdo);
+$diseaseTable = new DiseaseTable($pdo);
+$posts = $postTable->all(3);
+$diseases = $diseaseTable->all(4);
 
 $link = $router->url('home');
 ?>
@@ -21,7 +22,7 @@ $link = $router->url('home');
         <h1 class="display-3 text-light">Un Congo sain et sauf</h1>
         <p class=" text-light">This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <br>
-        <p><a class="btn btn-danger btn-lg" href="#" role="button">Aller plus loin &raquo;</a></p>
+        <p><a class="btn btn-danger btn-lg" href="<?=$router->url('posts_index') ?>" role="button">Plus d'infos &raquo;</a></p>
       </div>
     </div>
   
@@ -38,84 +39,22 @@ $link = $router->url('home');
         <?php endforeach ?>
       </div>
       <hr>
-      <h2 class="text-danger">Catégories</h2>
+      <h2 class="text-danger">Aperçu</h2>
       
       <div class="row">
-        <div class="col-md-3">
-          <div class="card mb-4 box-shadow">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Urgent</h4>
+        <?php foreach ($diseases as $disease): ?>
+            <div class="col-md-3">
+                <?php require 'disease/card.php' ?>
             </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">Covid-19 <small class="text-muted"></small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>Depuis 7 mois</li>
-                <li>1 120 cas confirmés dont 720 morts</li>
-                <li>5 provinces touchées</li>
-                <li>Alerte rouge</li>
-              </ul>
-              <button type="button" class="btn btn-lg btn-block btn-danger">Plus d'infos</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card mb-4 box-shadow">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Urgent</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">Covid-19 <small class="text-muted"></small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>Depuis 7 mois</li>
-                <li>1 120 cas confirmés dont 720 morts</li>
-                <li>5 provinces touchées</li>
-                <li>Alerte rouge</li>
-              </ul>
-              <button type="button" class="btn btn-lg btn-block btn-outline-danger">Plus d'infos</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card mb-4 box-shadow">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Urgent</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">Covid-19 <small class="text-muted"></small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>Depuis 7 mois</li>
-                <li>1 120 cas confirmés dont 720 morts</li>
-                <li>5 provinces touchées</li>
-                <li>Alerte rouge</li>
-              </ul>
-              <button type="button" class="btn btn-lg btn-block btn-outline-danger">Plus d'infos</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card mb-4 box-shadow">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Urgent</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">Covid-19 <small class="text-muted"></small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>Depuis 7 mois</li>
-                <li>1 120 cas confirmés dont 720 morts</li>
-                <li>5 provinces touchées</li>
-                <li>Alerte rouge</li>
-              </ul>
-              <button type="button" class="btn btn-lg btn-block btn-outline-danger">Plus d'infos</button>
-            </div>
-          </div>
-        </div>
+        <?php endforeach ?>
       </div>
-
-      
-  
+      <div class="d-flex flex-row-reverse">
+        <a class="btn btn-danger btn-lg" href="<?=$router->url('diseases_index')?>" role="button">Toutes les épidémies &raquo;</a>
+      </div>
     </div> <!-- /container -->
+    <br>
     <div class="container marketing">
-      <h2 class="text-danger">Ensemble, luttons contre le Covid-19</h2>
+      <h2 class="text-danger">Ensemble, luttons contre la Covid-19</h2>
       <br>
       
       <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -123,8 +62,7 @@ $link = $router->url('home');
           <div class="carousel-item h-auto active">
             <div class="row featurette">
               <div class="col-md-7">
-                <h2 class="featurette-heading">Tous nous sommes concernés. <span class="text-muted">Jack Dorsey</span></h2>
-                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                <h2 class="featurette-heading">Tous nous sommes concernés. - <span class="text-muted font-italic">Jack Dorsey</span></h2>
               </div>
               <div class="col-md-5">
                 <img class="featurette-image img-fluid mx-auto" src="images/feat.jpg" alt="Generic placeholder image">
@@ -135,7 +73,6 @@ $link = $router->url('home');
             <div class="row featurette">
               <div class="col-md-7">
                 <h2 class="featurette-heading">Tous nous sommes concernés. <span class="text-muted">Jack Dorsey</span></h2>
-                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
               </div>
               <div class="col-md-5">
                 <img class="featurette-image img-fluid mx-auto" src="images/feat.jpg" alt="Generic placeholder image">
@@ -147,7 +84,6 @@ $link = $router->url('home');
             <div class="row featurette">
               <div class="col-md-7">
                 <h2 class="featurette-heading">Tous nous sommes concernés. <span class="text-muted">Jack Dorsey</span></h2>
-                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
               </div>
               <div class="col-md-5">
                 <img class="featurette-image img-fluid mx-auto" src="images/feat.jpg" alt="Generic placeholder image">

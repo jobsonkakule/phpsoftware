@@ -5,6 +5,7 @@ use App\Connection;
 use App\Table\CategoryTable;
 
 Auth::check();
+Auth::restrict();
 
 $pdo = Connection::getPDO();
 

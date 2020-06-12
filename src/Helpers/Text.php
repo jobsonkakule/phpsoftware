@@ -1,6 +1,8 @@
 <?php
 namespace App\Helpers;
 
+use DateTime;
+
 class Text {
 
     public static function excerpt (string $content, $limit = 60) {

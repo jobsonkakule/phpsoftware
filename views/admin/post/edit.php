@@ -1,6 +1,6 @@
 <?php
 
-use App\Attachment\PostAttachment;
+use App\Attachment\EntityAttachment;
 use App\Auth;
 use App\Hydrator;
 use App\HTML\Form;
@@ -25,10 +25,10 @@ $errors = [];
 if(!empty($_POST)) {
     $data = array_merge($_POST, $_FILES);
     $v = new PostValidator($data, $postTable, $post->getId(), $categories);
-    Hydrator::hydrate($post, $data, ['name', 'slug', 'content', 'created_at', 'image']);
+    Hydrator::hydrate($post, $data, ['name', 'content', 'image']);
     if ($v->validate()) {
         $pdo->beginTransaction();
-        PostAttachment::upload($post);
+        EntityAttachment::upload($post);
         $postTable->updatePost($post);
         $postTable->attachCategories($post->getId(), $_POST['categories_ids']);
         $pdo->commit();

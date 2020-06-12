@@ -3,14 +3,13 @@ namespace App\Entity;
 
 use DateTime;
 use App\Helpers\Text;
+use Cocur\Slugify\Slugify;
 
 class Post {
 
     private $id;
 
     private $name;
-
-    private $slug;
 
     private $content;
 
@@ -21,6 +20,8 @@ class Post {
     private $oldImage;
 
     private $pendingUpload = false;
+
+    private $uploadPath =  UPLOAD_PATH . DIRECTORY_SEPARATOR . 'posts';
 
     private $categories = [];
 
@@ -45,7 +46,7 @@ class Post {
      */ 
     public function getSlug(): ?string
     {
-        return $this->slug;
+        return (new Slugify())->slugify($this->name);
     }
 
     /**
@@ -114,17 +115,6 @@ class Post {
     public function setContent(string $content): self
     {
         $this->content = $content;
-        return $this;
-    }
-
-    /**
-     * Set the value of slug
-     *
-     * @return  self
-     */ 
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
         return $this;
     }
 
@@ -221,5 +211,13 @@ class Post {
     public function shouldUpload(): bool
     {
         return $this->pendingUpload;
+    }
+
+    /**
+     * Get the value of uploadPath
+     */ 
+    public function getUploadPath()
+    {
+        return $this->uploadPath;
     }
 }

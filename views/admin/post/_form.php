@@ -1,6 +1,5 @@
 <form action="" method="POST" enctype="multipart/form-data">
     <?= $form->input('name', 'Titre') ?>
-    <?= $form->input('slug', 'Url') ?>
     <div class="row">
         <div class="col-md-9">
             <?= $form->file('image', 'Image à la une') ?>
@@ -11,9 +10,17 @@
             <?php endif ?>
         </div>
     </div>
-    <?= $form->select('categories_ids', 'Catégories', $categories) ?>
+    <div class="row">
+        <div class="col-md-9">
+            <?= $form->select('categories_ids', 'Catégories', $categories, true) ?>
+        </div>
+        <div class="col-md-3">
+            <?php if ($post->getId() === null): ?>
+                <?= $form->input('created_at', 'Date de création', 'text', true, false, ['datepicker']) ?>
+            <?php endif ?>
+        </div>
+    </div>
     <?= $form->textarea('content', 'Contenu') ?>
-    <?= $form->input('created_at', 'Date de création') ?>
     
     <button class="btn btn-primary">
         <?php if ($post->getId() !== null): ?>

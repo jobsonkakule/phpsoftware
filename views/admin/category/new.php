@@ -9,6 +9,7 @@ use App\Table\CategoryTable;
 use App\Validators\CategoryValidator;
 
 Auth::check();
+Auth::restrict();
 $errors = [];
 /** @var Category */
 $item = new Category();
@@ -17,7 +18,7 @@ if(!empty($_POST)) {
     $pdo = Connection::getPDO();
     $table = new CategoryTable($pdo);
     $v = new CategoryValidator($_POST, $table);
-    Hydrator::hydrate($item, $_POST, ['name', 'slug']);
+    Hydrator::hydrate($item, $_POST, ['name']);
     if ($v->validate()) {
         $table->create([
             'name' => $item->getName(),

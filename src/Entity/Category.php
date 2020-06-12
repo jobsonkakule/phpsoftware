@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
+
 class Category{
 
     private $id;
@@ -12,6 +14,11 @@ class Category{
     private $post_id;
     
     private $post;
+
+    public function __construct()
+    {
+        $this->slug = (new Slugify())->slugify($this->name);
+    }
     /**
      * Get the value of id
      */ 

@@ -9,13 +9,14 @@ use App\Table\CategoryTable;
 use App\Validators\CategoryValidator;
 
 Auth::check();
+Auth::restrict();
 $pdo = Connection::getPDO();
 $table = new CategoryTable($pdo);
 /** @var Category */
 $item = $table->find($params['id']);
 $success = false;
 $errors = [];
-$fields = ['name', 'slug'];
+$fields = ['name'];
 
 if(!empty($_POST)) {
     $v = new CategoryValidator($_POST, $table, $item->getId());

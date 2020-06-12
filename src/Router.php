@@ -60,6 +60,10 @@ class Router {
             require $this->viewPath . DIRECTORY_SEPARATOR . $layout .'.php';
 
         } catch (ForbiddenException $e) {
+            if (isset($_SESSION['auth'])) {
+                header('Location: ' . $this->url('user', ['id' => $_SESSION['auth']]) . '?forbidden=1');
+                exit();
+            }
             header('Location: ' . $this->url('login') . '?forbidden=1');
             exit();
         }

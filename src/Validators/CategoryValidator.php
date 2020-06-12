@@ -9,11 +9,10 @@ class CategoryValidator extends AbstractValidator {
     public function __construct(array $data, CategoryTable $table, ?int $id = null)
     {
         parent::__construct($data);
-        $this->validator->rule('required', ['name', 'slug']);
-        $this->validator->rule('lengthBetween', ['name', 'slug'], 3, 100);
-        $this->validator->rule('slug', 'slug');
+        $this->validator->rule('required', ['name']);
+        $this->validator->rule('lengthBetween', ['name'], 3, 100);
         $this->validator->rule(function ($field, $value) use ($table, $id) {
             return !$table->exists($field, $value, $id);
-        }, ['slug', 'name'], 'existe déjà dans la base de données');
+        }, ['name'], 'existe déjà dans la base de données');
     }
 }

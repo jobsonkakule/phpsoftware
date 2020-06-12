@@ -14,7 +14,7 @@
     
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
-    <link href="css/fontawesome/css/all.css" rel="stylesheet">
+    <link href="/css/fontawesome/css/all.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-danger pb-0 pt-0">
@@ -53,6 +53,15 @@
           <a href="" class="pl-3"><i class="fab fa-twitter"></i></a>
           <a href="" class="pl-3"><i class="fab fa-youtube"></i></a>
         </div>
+        <?php if (isset($_SESSION['auth'])):?>
+          <a href="<?=$router->url('user', ['id' => $_SESSION['auth']]) ?>" title="Mon compe">
+            <?php if(isset($_SESSION['avatar'])): ?>
+              <img src="<?= $_SESSION['avatar'] ?>" alt="<?="Amet" ?>" width="50" class="my-0 ml-3 avatar">
+            <?php else: ?>
+              <img src="/images/user.jpg" alt="<?="Amet" ?>" width="50" class="my-0 ml-3 avatar">
+            <?php endif ?>
+          </a>
+        <?php endif ?>
         <!--<form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
@@ -73,8 +82,20 @@
                     <img src="/images/logo.png" alt="" width="100">
                 </div>
                 <div>
-                    <a href="<?=$router->url('login') ?>" class="btn btn-secondary">Se connecter</a>
-                    <a href="" class="btn btn-danger">s'inscrire</a>
+                  
+                  <?php if (isset($_SESSION['auth'])):?>
+                    <form action="<?= $router->url('logout') ?>" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-danger">Se déconnecter</button>
+                    </form>
+                    <?php if($_SESSION['role'] === 'Administrateur' || $_SESSION['role'] === 'Editeur'): ?>
+                      <div style="display: inline;">
+                          <a href="<?= $router->url('admin') ?>" class="btn btn-secondary">Administration</a>
+                      </div>
+                    <?php endif ?>
+                  <?php else: ?>
+                      <a href="<?=$router->url('login') ?>" class="btn btn-secondary">Se connecter</a>
+                      <a href="<?=$router->url('signup') ?>" class="btn btn-danger">S'inscrire</a>
+                  <?php endif ?>
                 </div>
             </div>
             <div class="col-12 col-md">
@@ -105,7 +126,13 @@
         </p>
     </footer>  
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <!-- <script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/3.0.2/timeago.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js"></script>
+    <script>
+        timeago().render(document.querySelectorAll('.timeago'), 'fr')
+    </script>
 </body>
 </html>
 

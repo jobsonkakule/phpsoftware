@@ -28,6 +28,10 @@ $danger: rgb(192, 50, 50);
     width: 100%;
   }
 }
+img.avatar {
+  border-radius: 50%;
+  border: solid 2px #d6e4ee;
+}
 .blog-footer {
   padding: 2.5rem 0;
   color: #999;

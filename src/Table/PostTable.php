@@ -14,9 +14,7 @@ class PostTable extends Table {
     {
         $this->update([
             'name' => $post->getName(),
-            'slug' => $post->getSlug(),
             'content' => $post->getContent(),
-            'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s'),
             'image' => $post->getImage()
         ], $post->getId());
     }
@@ -25,7 +23,6 @@ class PostTable extends Table {
     {
         $id = $this->create([
             'name' => $post->getName(),
-            'slug' => $post->getSlug(),
             'content' => $post->getContent(),
             'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s'),
             'image' => $post->getImage()

@@ -21,7 +21,7 @@ if ($post->getSlug() !== $slug) {
 <div class="container container-top">
     <h1><?= e($post->getName()) ?></h1>
     <p class="text-muted">
-        <?=$post->getCreatedAt()->format('d F Y') ?>
+        <?=$post->getCreatedAt()->format('d F Y à H:i') ?>
     </p>
     <?php foreach($post->getCategories() as $k => $category):
         if ($k > 0): 

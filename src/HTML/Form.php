@@ -15,13 +15,16 @@ class Form {
         $this->errors = $errors;
     }
 
-    public function input (string $key, string $label, $type = 'text'): string
+    public function input (string $key, string $label, $type = 'text', bool $required = true, bool $disabled = false, array $class = []): string
     {
         $value = $this->getValue($key);
+        $required = $required ? 'required' : '';
+        $disabled = $disabled === true ? 'disabled' : '';
+        $class = implode(' ', $class);
         return <<<HTML
             <div class="form-group">
                 <label for="field{$key}">{$label}</label>
-                <input id="field{$key}" type="{$type}" name="{$key}" class="{$this->getInputCalss($key)}" value="{$value}" required>
+                <input id="field{$key}" type="{$type}" name="{$key}" class="{$this->getInputCalss($key)} $class" value="{$value}" $required $disabled>
                 {$this->getErrorFeedBack($key)}
             </div>
         HTML;
@@ -39,31 +42,40 @@ class Form {
         HTML;
     }
 
-    public function textarea (string $key, string $label): string
+    public function textarea (string $key, string $label, bool $required = true): string
     {
         $value = $this->getValue($key);
+        $required = $required ? 'required' : '';
         return <<<HTML
             <div class="form-group">
                 <label for="field{$key}">{$label}</label>
-                <textarea id="field{$key}" type="text"  name="{$key}" class="{$this->getInputCalss($key)}" rows="10" required>{$value}</textarea>
+                <textarea id="field{$key}" type="text"  name="{$key}" class="{$this->getInputCalss($key)}" rows="10" $required>{$value}</textarea>
                 {$this->getErrorFeedBack($key)}
             </div>
         HTML;
     }
 
-    public function select (string $key, string $label, array $options = [])
+    public function select (string $key, string $label, array $options = [], bool $multiple = false)
     {
+        $name = $multiple === true ? $key . '[]' : $key;
+        $multiple = $multiple === true ? ' multiple' : '';
         $optionsHTML = [];
+
         $value = $this->getValue($key);
         foreach ($options as $k => $v) {
-            $selcted = in_array($k, $value) ? " selected" : "";
-            $optionsHTML[] = "<option value=\"$k\"$selcted>$v</option>";
+            if (is_array($value)) {
+                $selcted = in_array($k, $value) ? " selected" : "";
+                $optionsHTML[] = "<option value=\"$k\"$selcted>$v</option>";
+            } else {
+                $selcted = $v === $value ? " selected" : "";
+                $optionsHTML[] = "<option value=\"$v\"$selcted>$v</option>";
+            }
         }
         $optionsHTML = implode('', $optionsHTML);
         return <<<HTML
             <div class="form-group">
                 <label for="field{$key}">{$label}</label>
-                <select id="field{$key}" name="{$key}[]" class="{$this->getInputCalss($key)}" required multiple>{$optionsHTML}</select>
+                <select id="field{$key}" name="$name" class="{$this->getInputCalss($key)}" required {$multiple}>{$optionsHTML}</select>
                 {$this->getErrorFeedBack($key)}
             </div>
         HTML;
