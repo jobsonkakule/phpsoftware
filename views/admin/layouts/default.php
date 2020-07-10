@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= e($title ?? 'Sanitas | Accueil') ?></title>
+    <title><?= e($title ?? 'Sanitas | Administration') ?></title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="/css/fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.css">
@@ -19,14 +19,14 @@
     
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown active">
-            <a class ="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acutalités</a><span class="sr-only">(current)</span></a>
-          </li>
           <li class="nav-item">
             <a href="<?= $router->url('admin_posts') ?>" class="nav-link">Articles</a>
           </li>
           <li class="nav-item">
-            <a href="<?= $router->url('admin_quotes') ?>" class="nav-link">Citations</a>
+            <a href="<?= $router->url('admin_quotes') ?>" class="nav-link">Statistiques</a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= $router->url('admin_stats') ?>" class="nav-link">Citations</a>
           </li>
           <?php if(isset($_SESSION['auth']) && ($_SESSION['role'] === 'Administrateur')): ?>
             <li class="nav-item">

@@ -20,7 +20,7 @@ $link = $router->url('admin_posts');
         L'enregistrement  a été supprimé avec succès
     </div>
 <?php endif ?>
-<h1 cla>Gérer les articles <span class="text-right text-muted">(10)</span></h1>
+<h1 cla>Gérer les articles <span class="text-right text-muted">(<?= $table->count() ?>)</span></h1>
 <div class="d-flex justify-content-between my-3">
     <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Entrer un mot-clé" aria-label="Entrer un mot-clé">

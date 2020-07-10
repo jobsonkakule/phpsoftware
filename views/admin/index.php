@@ -6,6 +6,7 @@ use App\Table\CategoryTable;
 use App\Table\DiseaseTable;
 use App\Table\PostTable;
 use App\Table\QuoteTable;
+use App\Table\StatTable;
 use App\Table\UserTable;
 
 Auth::check();
@@ -15,6 +16,7 @@ $category = new CategoryTable($pdo);
 $disease = new DiseaseTable($pdo);
 $user = new UserTable($pdo);
 $quote = new QuoteTable($pdo);
+$stat = new StatTable($pdo);
 
 ?>
 
@@ -33,7 +35,14 @@ $quote = new QuoteTable($pdo);
             <div class="card mt-2">
                 <span>Total</span>
                 <span style="font-size: 7rem;" class="font-weight-bold"><?= $disease->count() ?></span>
-                <a href="<?= $router->url('admin_posts') ?>" class="btn btn-primary">Gérer les épidémies</a>
+                <a href="<?= $router->url('admin_diseases') ?>" class="btn btn-primary">Gérer les épidémies</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mt-2">
+                <span>Total</span>
+                <span style="font-size: 7rem;" class="font-weight-bold"><?= $stat->count() ?></span>
+                <a href="<?= $router->url('admin_stats') ?>" class="btn btn-primary">Gérer les statistiques</a>
             </div>
         </div>
         <div class="col-md-3">
@@ -48,14 +57,14 @@ $quote = new QuoteTable($pdo);
                 <div class="card mt-2">
                     <span>Total</span>
                     <span style="font-size: 7rem;" class="font-weight-bold"><?= $category->count() ?></span>
-                    <a href="<?= $router->url('admin_posts') ?>" class="btn btn-primary">Gérer les catégories</a>
+                    <a href="<?= $router->url('admin_categories') ?>" class="btn btn-primary">Gérer les catégories</a>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card mt-2">
                     <span>Total</span>
                     <span style="font-size: 7rem;" class="font-weight-bold"><?= $user->count() ?></span>
-                    <a href="<?= $router->url('admin_posts') ?>" class="btn btn-primary">Gérer les utilisateurs</a>
+                    <a href="<?= $router->url('admin_users') ?>" class="btn btn-primary">Gérer les utilisateurs</a>
                 </div>
             </div>
         <?php endif ?>

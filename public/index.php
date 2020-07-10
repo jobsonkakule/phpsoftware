@@ -77,5 +77,11 @@ $router
     ->match('/admin/disease/[i:id]', 'admin/disease/edit', 'admin_disease')
     ->post('/admin/disease/[i:id]/delete', 'admin/disease/delete', 'admin_disease_delete')
     ->match('/admin/disease/new', 'admin/disease/new', 'admin_disease_new')
+
+    // Stat
+    ->get('/admin/stats', 'admin/stat/index', 'admin_stats')
+    ->match('/admin/stat/[i:id]', 'admin/stat/edit', 'admin_stat')
+    ->post('/admin/stat/[i:id]/delete', 'admin/stat/delete', 'admin_stat_delete')
+    ->match('/admin/stat/new', 'admin/stat/new', 'admin_stat_new')
     
     ->run();

@@ -55,7 +55,7 @@ class Form {
         HTML;
     }
 
-    public function select (string $key, string $label, array $options = [], bool $multiple = false)
+    public function select (string $key, string $label, array $options = [], bool $multiple = false, $data = false)
     {
         $name = $multiple === true ? $key . '[]' : $key;
         $multiple = $multiple === true ? ' multiple' : '';
@@ -65,6 +65,9 @@ class Form {
         foreach ($options as $k => $v) {
             if (is_array($value)) {
                 $selcted = in_array($k, $value) ? " selected" : "";
+                $optionsHTML[] = "<option value=\"$k\"$selcted>$v</option>";
+            } elseif($data) {
+                $selcted = $k === $value ? " selected" : "";
                 $optionsHTML[] = "<option value=\"$k\"$selcted>$v</option>";
             } else {
                 $selcted = $v === $value ? " selected" : "";

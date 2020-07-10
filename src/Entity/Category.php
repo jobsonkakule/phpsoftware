@@ -15,10 +15,6 @@ class Category{
     
     private $post;
 
-    public function __construct()
-    {
-        $this->slug = (new Slugify())->slugify($this->name);
-    }
     /**
      * Get the value of id
      */ 
@@ -32,7 +28,7 @@ class Category{
      */ 
     public function getSlug(): ?string
     {
-        return $this->slug;
+        return (new Slugify())->slugify($this->name);
     }
 
     /**
@@ -69,18 +65,6 @@ class Category{
     public function setId(int $id): self
     {
         $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * Set the value of slug
-     *
-     * @return  self
-     */ 
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
         return $this;
     }
 

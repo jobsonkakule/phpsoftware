@@ -12,7 +12,7 @@ $diseases = $table->all();
 
 ?>
 <div class="container container-top">
-    <h1 class="text-center">Mon blog</h1>
+    <h1 class="text-center">Toutes les épidémies</h1>
     <hr>
     <div class="row">
         <?php foreach($diseases as $disease): ?>

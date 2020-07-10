@@ -3,13 +3,16 @@
 use App\Connection;
 use App\Table\DiseaseTable;
 use App\Table\PostTable;
+use App\Table\QuoteTable;
 
 $pdo = Connection::getPDO();
 
 $postTable = new PostTable($pdo);
 $diseaseTable = new DiseaseTable($pdo);
+$quoteTable = new QuoteTable($pdo);
 $posts = $postTable->all(3);
 $diseases = $diseaseTable->all(4);
+$quotes = $quoteTable->all(3);
 
 $link = $router->url('home');
 ?>
@@ -58,39 +61,21 @@ $link = $router->url('home');
       <br>
       
       <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item h-auto active">
-            <div class="row featurette">
-              <div class="col-md-7">
-                <h2 class="featurette-heading">Tous nous sommes concernés. - <span class="text-muted font-italic">Jack Dorsey</span></h2>
-              </div>
-              <div class="col-md-5">
-                <img class="featurette-image img-fluid mx-auto" src="images/feat.jpg" alt="Generic placeholder image">
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item h-auto">
-            <div class="row featurette">
-              <div class="col-md-7">
-                <h2 class="featurette-heading">Tous nous sommes concernés. <span class="text-muted">Jack Dorsey</span></h2>
-              </div>
-              <div class="col-md-5">
-                <img class="featurette-image img-fluid mx-auto" src="images/feat.jpg" alt="Generic placeholder image">
+        <div id="carousel1" class="carousel-inner">
+          <?php foreach($quotes as $quote): ?>
+            <div class="carousel-item h-auto">
+              <div class="row featurette">
+                <div class="col-md-7">
+                  <h2 class="featurette-heading"><?=$quote->getContent() ?> - <span class="text-muted font-italic"><?=$quote->getName() ?></span></h2>
+                </div>
+                <?php if ($quote->getImage()): ?>
+                  <div class="col-md-5">
+                    <img class="featurette-image img-fluid mx-auto" src="<?= $quote->getImageURL('large') ?>" alt="Generic placeholder image">
+                  </div>
+                <?php endif ?>
               </div>
             </div>
-          
-          </div>
-          <div class="carousel-item h-auto">
-            <div class="row featurette">
-              <div class="col-md-7">
-                <h2 class="featurette-heading">Tous nous sommes concernés. <span class="text-muted">Jack Dorsey</span></h2>
-              </div>
-              <div class="col-md-5">
-                <img class="featurette-image img-fluid mx-auto" src="images/feat.jpg" alt="Generic placeholder image">
-              </div>
-            </div>
-          
-          </div>
+          <?php endforeach ?>
         </div>
       </div>
     </div>

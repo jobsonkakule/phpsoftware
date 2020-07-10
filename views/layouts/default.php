@@ -39,7 +39,7 @@
             <a class="nav-link" href="#">Forum</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Statistiques</a>
+            <a class="nav-link" href="<?= $router->url('diseases_index') ?>">Statistiques</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">A propos</a>
@@ -133,6 +133,7 @@
     <script>
         timeago().render(document.querySelectorAll('.timeago'), 'fr')
     </script>
+    <script src="/js/app.js"></script>
 </body>
 </html>
 

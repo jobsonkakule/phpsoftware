@@ -14,6 +14,11 @@ $pdo = Connection::getPDO();
 // $pdo->exec('TRUNCATE TABLE user');
 // $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 
+// $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
+// $pdo->exec('TRUNCATE TABLE province');
+// $pdo->exec('TRUNCATE TABLE city');
+// $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
+
 // $posts = [];
 // $categories = [];
 // $states = ['current', 'past', 'investigation'];
@@ -39,6 +44,14 @@ $pdo = Connection::getPDO();
 //     }
 // }
 // $password = password_hash('editor', PASSWORD_BCRYPT);
+// for ($i = 0; $i < 25; $i++) {
+//     $pdo->exec("INSERT INTO province SET title='{$faker->country}'");
+// }
+// for ($i = 0; $i < 15; $i++) {
+//     $id = rand(0,26);
+//     $pdo->exec("INSERT INTO city SET title='{$faker->city}', province_id = $id");
+// }
+
 // $pdo->exec("INSERT INTO user SET username='editor', password='$password', pseudo='{$faker->name}', email='{$faker->email}', role='editor'");
 
 // $password = password_hash('user', PASSWORD_BCRYPT);

@@ -27,6 +27,11 @@ class Disease {
 
     private $uploadPath =  UPLOAD_PATH . DIRECTORY_SEPARATOR . 'diseases';
 
+    private $cases;
+    private $deaths;
+    private $recoveries;
+    private $province;
+
     /**
      * Get the value of id
      */ 
@@ -226,5 +231,85 @@ class Disease {
     public function getUploadPath()
     {
         return $this->uploadPath;
+    }
+
+    /**
+     * Get the value of cases
+     */ 
+    public function getCases(): ?int
+    {
+        return $this->cases;
+    }
+
+    /**
+     * Set the value of cases
+     *
+     * @return  self
+     */ 
+    public function setCases($cases)
+    {
+        $this->cases = $cases;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of deaths
+     */ 
+    public function getDeaths(): ?int
+    {
+        return $this->deaths;
+    }
+
+    /**
+     * Set the value of deaths
+     *
+     * @return  self
+     */ 
+    public function setDeaths($deaths)
+    {
+        $this->deaths = $deaths;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of recoveries
+     */ 
+    public function getRecoveries(): ?int
+    {
+        return $this->recoveries;
+    }
+
+    /**
+     * Set the value of recoveries
+     *
+     * @return  self
+     */ 
+    public function setRecoveries($recoveries)
+    {
+        $this->recoveries = $recoveries;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of province
+     */ 
+    public function getProvince()
+    {
+        return $this->province;
+    }
+
+    /**
+     * Set the value of province
+     *
+     * @return  self
+     */ 
+    public function setProvince($province)
+    {
+        $this->province = $province;
+
+        return $this;
     }
 }

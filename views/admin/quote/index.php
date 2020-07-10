@@ -21,7 +21,7 @@ $link = $router->url('admin_quotes');
     </div>
 <?php endif ?>
 <h1 cla>Gérer les citatons <span class="text-right text-muted">
-    <?= $table->count() ?>
+    (<?= $table->count() ?>)
 </span></h1>
 <div class="d-flex justify-content-between my-3">
     <form class="form-inline my-2 my-lg-0">

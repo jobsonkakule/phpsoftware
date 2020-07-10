@@ -12,8 +12,9 @@ $title = 'Administration | Sanitas';
 
 $pdo = Connection::getPDO();
 
+$table = new CategoryTable($pdo);
 /** @var Category[] */
-$items = (new CategoryTable($pdo))->all();
+$items = $table->all();
 
 $link = $router->url('admin_categories');
 ?>
@@ -22,7 +23,7 @@ $link = $router->url('admin_categories');
         L'enregistrement  a été supprimé avec succès
     </div>
 <?php endif ?>
-<h1>Gérer les catégories</h1>
+<h1>Gérer les catégories<span class="text-right text-muted">(<?= $table->count() ?>)</span></h1>
 <table class="table table-striped">
     <thead>
         <th>#ID</th>
